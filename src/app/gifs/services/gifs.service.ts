@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Gif, SearchGIFResponse } from '../interface/gif.interface';
 
 @Injectable({
   //Esto hace que el servicio ya sea de acceso global (creo que utilizando singleton)
@@ -9,7 +10,7 @@ export class GifsService {
   private apiKey: string = ' ';
   private _historial: string[] = [];
 
-  public resultado: any[] = [];
+  public resultado: Gif[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -26,10 +27,10 @@ export class GifsService {
     console.log(this._historial);
 
     this.http
-      .get(
+      .get<SearchGIFResponse>(
         `https://api.giphy.com/v1/gifs/search?api_key=19xNlbVfq0GKCG4x9uK8DOUlbEV7NwVf&q=${query}&limit=10`
       )
-      .subscribe((resp: any) => {
+      .subscribe((resp) => {
         console.log(resp.data);
         this.resultado = resp.data;
       });
