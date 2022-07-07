@@ -5,6 +5,7 @@
     <a
       *ngFor="let item of historial; let i = index"
       href="#"
+      (click)="buscar(item)"
       class="list-group-item list-group-item-action"
     >
       {{ item | titlecase }}
